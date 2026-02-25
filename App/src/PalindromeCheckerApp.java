@@ -1,3 +1,4 @@
+import java.util.Scanner;
 public class PalindromeCheckerApp {
     static String version = "1.0";
     public static void main(String[] args) {
@@ -14,5 +15,19 @@ public class PalindromeCheckerApp {
         } else {
             System.out.println("Palindrome: No");
         }
+        Scanner sc = new Scanner(System.in);
+        System.out.println("Enter a string to check palindrome:");
+        String input = sc.nextLine();
+        String reversedInput = "";
+        for (int i = input.length() - 1; i >= 0; i--) {
+            reversedInput += input.charAt(i);
+        }
+        System.out.println("Input String: " + input);
+        if (input.equals(reversedInput)) {
+            System.out.println("Palindrome: Yes");
+        } else {
+            System.out.println("Palindrome: No");
+        }
+        sc.close();
     }
 }
