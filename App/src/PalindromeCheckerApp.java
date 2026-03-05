@@ -1,8 +1,6 @@
 import java.util.Scanner;
-import java.util.Stack;
 
 public class PalindromeCheckerApp {
-
     public static void main(String[] args) {
 
         Scanner sc = new Scanner(System.in);
@@ -10,37 +8,37 @@ public class PalindromeCheckerApp {
         System.out.print("Input : ");
         String input = sc.nextLine();
 
-        // Inject strategy at runtime
-        PalindromeStrategy strategy = new StackStrategy();
+        // Capture start time
+        long startTime = System.nanoTime();
 
-        boolean result = strategy.check(input);
+        boolean isPalindrome = checkPalindrome(input);
 
-        System.out.println("Is Palindrome? : " + result);
+        // Capture end time
+        long endTime = System.nanoTime();
+
+        long executionTime = endTime - startTime;
+
+        System.out.println("Is Palindrome? : " + isPalindrome);
+        System.out.println("Execution Time : " + executionTime + " ns");
 
         sc.close();
     }
-}
-interface PalindromeStrategy {
-    boolean check(String input);
-}
 
-class StackStrategy implements PalindromeStrategy {
+    // Palindrome checking method
+    public static boolean checkPalindrome(String input) {
 
-    public boolean check(String input) {
+        int start = 0;
+        int end = input.length() - 1;
 
-        Stack<Character> stack = new Stack<>();
-
-        // Push characters into stack
-        for (char c : input.toCharArray()) {
-            stack.push(c);
-        }
-
-        // Compare by popping
-        for (char c : input.toCharArray()) {
-            if (c != stack.pop()) {
+        while (start < end) {
+            if (Character.toLowerCase(input.charAt(start)) !=
+                    Character.toLowerCase(input.charAt(end))) {
                 return false;
             }
+            start++;
+            end--;
         }
+
         return true;
     }
 }
